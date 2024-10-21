@@ -1,0 +1,8 @@
+Pacotes (Package)
+
+- São agrupamentos de funcionalidades (procedures/function);
+- Objetivo: concentrar estruturas afins.
+- São construídos em duas partes:
+
+PARTE I: declaração de estruturas que farão parte do package.
+PARTE II: implementaçãp do package.

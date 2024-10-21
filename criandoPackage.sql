@@ -1,0 +1,70 @@
+-- Como criamos a Procedure:
+PROCEDURE PROC_CALC_FGTS
+(
+    V_SB IN NUMBER,
+    V_FGTS OUT NUMBER
+)
+IS
+BEGIN
+    V_FGTS := V_SB * 0.08;
+END;
+
+-- Como criamos a Function:
+FUNCTION PROC_CALC_FGTS
+(
+    V_SB IN NUMBER
+)
+RETURN NUMBER
+IS
+BEGIN
+    RETURN V_SB * 0.08;
+END;
+
+-- Criando um Package:
+-- Parte I: Declaração do PACKAGE
+CREATE OR REPLACE PACKAGE PCK_CALC_SALARIO
+IS
+    PROCEDURE PROC_CALC_FGTS
+    (
+        V_SB IN NUMBER,
+        V_FGTS OUT NUMBER
+    );
+
+    FUNCTION FUNC_CALC_FGTS
+    (
+        V_SB IN NUMBER
+    )
+    RETURN NUMBER;
+END PCK_CALC_SALARIO;
+
+-- Parte II: Implementação do PACKAGE
+CREATE OR REPLACE PACKAGE BODY PCK_CALC_SALARIO
+IS
+    PROCEDURE PROC_CALC_FGTS
+    (
+        V_SB IN NUMBER,
+        V_FGTS OUT NUMBER
+    )
+    IS
+    BEGIN
+        V_FGTS := V_SB * 0.08;
+    END;
+
+    FUNCTION FUNC_CALC_FGTS
+    (
+        V_SB IN NUMBER
+    )
+    RETURN NUMBER
+    IS
+    BEGIN
+        RETURN V_SB * 0.08;
+    END;
+END PCK_CALC_SALARIO;
+
+-- Bloco anônimo do Package
+DECLARE
+    V_FGTS NUMBER;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('FGTS: ' || PCK_CALC_SALARIO.PROC_CALC_FGTS(1000,V_FGTS));
+    DBMS_OUTPUT.PUT_LINE('FGTS 2: ' || PCK_CALC_SALARIO.FUNC_CALC_FGTS(1000));
+END;
